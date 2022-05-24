@@ -37,8 +37,8 @@ M.plugins = {
          separator_style = "default", -- default/round/slant/block/arrow
       },
       telescope = {
-         extensions = { "themes", "terms" }
-      }
+         extensions = { "themes", "terms" },
+      },
    },
 
    -- add, modify, remove plugins

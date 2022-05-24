@@ -23,9 +23,9 @@ local cmp_window = require "cmp.utils.window"
 
 cmp_window.info_ = cmp_window.info
 cmp_window.info = function(self)
-  local info = self:info_()
-  info.scrollable = false
-  return info
+   local info = self:info_()
+   info.scrollable = false
+   return info
 end
 
 local options = {
@@ -99,3 +99,12 @@ local options = {
 options = nvchad.load_override(options, "hrsh7th/nvim-cmp")
 
 cmp.setup(options)
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(":", {
+   sources = cmp.config.sources({
+      { name = "path" },
+   }, {
+      { name = "cmdline" },
+   }),
+})

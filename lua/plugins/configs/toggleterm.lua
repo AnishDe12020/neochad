@@ -1,6 +1,6 @@
-require("toggleterm").setup({
-	open_mapping = [[<C-\>]],
-        --  open_mapping = [[<c-x>]],
+require("toggleterm").setup {
+   open_mapping = [[<C-\>]],
+   --  open_mapping = [[<c-x>]],
    hide_numbers = true, -- hide the number column in toggleterm buffers
    shade_filetypes = {},
    shade_terminals = false,
@@ -11,7 +11,7 @@ require("toggleterm").setup({
    direction = "horizontal", --'horizontal', -- 'vertical' | 'horizontal' | 'window' | 'float',
    shell = vim.o.shell, -- change the default shell
    -- This field is only relevant if direction is set to 'float'
-})
+}
 
 function _G.set_terminal_keymaps()
    local opts = { noremap = true }
@@ -24,10 +24,8 @@ function _G.set_terminal_keymaps()
 end
 
 local Terminal = require("toggleterm.terminal").Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+local lazygit = Terminal:new { cmd = "lazygit", hidden = true, direction = "float" }
 
 lazygit_toggle = function()
-	lazygit:toggle()
+   lazygit:toggle()
 end
-
-

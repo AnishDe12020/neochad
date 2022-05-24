@@ -78,5 +78,4 @@ end
 register_mappings(mappings, options)
 register_mappings(mapping_groups, options)
 
-
 wk.setup(options)

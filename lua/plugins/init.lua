@@ -16,9 +16,15 @@ local plugins = {
       end,
    },
 
-   ["NvChad/nvterm"] = {
+   -- ["NvChad/nvterm"] = {
+   --    config = function()
+   --       require "plugins.configs.nvterm"
+   --    end,
+   -- },
+
+   ["akinsho/toggleterm.nvim"] = {
       config = function()
-         require "plugins.configs.nvterm"
+         require "plugins.configs.toggleterm"
       end,
    },
 
@@ -161,6 +167,8 @@ local plugins = {
       after = "cmp-buffer",
    },
 
+   ["hrsh7th/cmp-cmdline"] = {},
+
    -- misc plugins
    ["windwp/nvim-autopairs"] = {
       after = "nvim-cmp",
@@ -184,9 +192,16 @@ local plugins = {
       end,
    },
 
+   ["jose-elias-alvarez/null-ls.nvim"] = {
+      after = "nvim-lspconfig",
+      config = function()
+         require "plugins.configs.null-ls"
+      end,
+   },
+
    -- file managing , picker etc
    ["kyazdani42/nvim-tree.lua"] = {
-      ft = 'alpha',
+      ft = "alpha",
       cmd = { "NvimTreeToggle", "NvimTreeFocus" },
       config = function()
          require "plugins.configs.nvimtree"
