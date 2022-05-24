@@ -5,7 +5,7 @@ if present then
 end
 
 require "core"
-require "core.utils"
+  require "core.utils"
 require "core.options"
 
 -- setup packer + plugins
