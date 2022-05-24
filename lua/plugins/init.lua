@@ -16,12 +16,6 @@ local plugins = {
       end,
    },
 
-   -- ["NvChad/nvterm"] = {
-   --    config = function()
-   --       require "plugins.configs.nvterm"
-   --    end,
-   -- },
-
    ["akinsho/toggleterm.nvim"] = {
       config = function()
          require "plugins.configs.toggleterm"
