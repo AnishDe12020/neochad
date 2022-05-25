@@ -211,4 +211,9 @@ M.gitsigns = function()
    }
 end
 
+M.copilot = function()
+   vim.g.copilot_filetypes = { ["*"] = true }
+   vim.g.copilot_no_tab_map = true
+end
+
 return M

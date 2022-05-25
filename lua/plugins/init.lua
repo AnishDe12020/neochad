@@ -16,6 +16,8 @@ local plugins = {
       end,
    },
 
+   ["folke/trouble.nvim"] = {},
+
    ["akinsho/toggleterm.nvim"] = {
       config = function()
          require "plugins.configs.toggleterm"
@@ -190,6 +192,12 @@ local plugins = {
       after = "nvim-lspconfig",
       config = function()
          require "plugins.configs.null-ls"
+      end,
+   },
+
+   ["github/copilot.vim"] = {
+      config = function()
+         require("plugins.configs.others").copilot()
       end,
    },
 

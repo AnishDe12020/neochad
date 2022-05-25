@@ -43,6 +43,9 @@ M.plugins = {
 
    -- add, modify, remove plugins
    user = {},
+   status = {
+      alpha = true,
+   },
 }
 
 -- check core.mappings for table structure

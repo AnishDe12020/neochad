@@ -284,4 +284,8 @@ M.toggleterm = {
    },
 }
 
+vim.cmd [[
+	imap <script><silent><nowait><expr> <C-c> copilot#Accept()
+]]
+
 return M
