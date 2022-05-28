@@ -51,6 +51,22 @@ M.general = {
 
          "   toggle theme",
       },
+
+      -- move text
+      ["<A-j>"] = { ":m .+1<CR>", "Move Text Down" },
+      ["<A-k>"] = { ":m .-2<CR>", "Move Text Up" },
+   },
+
+   v = {
+      -- move text
+      ["<A-j>"] = { ":m .+1<CR>", "Move Text Down" },
+      ["<A-k>"] = { ":m .-2<CR>", "Move Text Up" },
+   },
+
+   x = {
+      -- move text
+      ["<A-j>"] = { ":m '>+1<CR>gv-gv", "Move Text Down" },
+      ["<A-k>"] = { ":m '<-2<CR>gv-gv", "Move Text Up" },
    },
 
    t = {
