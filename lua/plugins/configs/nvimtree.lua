@@ -64,8 +64,9 @@ local options = {
       hide_root_folder = true,
    },
    git = {
-      enable = false,
-      ignore = true,
+      enable = true,
+      ignore = false,
+      timeout = 500,
    },
    actions = {
       open_file = {
