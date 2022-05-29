@@ -165,6 +165,9 @@ local plugins = {
 
    ["hrsh7th/cmp-cmdline"] = {},
 
+   -- snippet plugins
+   ["buidler-hub/react-nextjs-snippets"] = {},
+
    -- misc plugins
    ["windwp/nvim-autopairs"] = {
       after = "nvim-cmp",
@@ -200,6 +203,8 @@ local plugins = {
          require("plugins.configs.others").copilot()
       end,
    },
+
+   ["wakatime/vim-wakatime"] = {},
 
    -- file managing , picker etc
    ["kyazdani42/nvim-tree.lua"] = {
