@@ -74,7 +74,7 @@ lspconfig.sumneko_lua.setup {
    },
 }
 
-local servers = { "tsserver", "tailwindcss", "eslint", "cssls", "gopls", "prismals", "rust_analyzer" }
+local servers = { "tsserver", "tailwindcss", "eslint", "cssls", "gopls", "prismals", "rust_analyzer", "solang" }
 
 for _, lsp in ipairs(servers) do
    lspconfig[lsp].setup {
