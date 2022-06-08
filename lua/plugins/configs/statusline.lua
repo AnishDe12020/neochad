@@ -1,5 +1,11 @@
 local present, feline = pcall(require, "feline")
 
+local hl_groups = require "plugins.configs.feline_hl"
+
+for group, hl in pairs(hl_groups) do
+   vim.api.nvim_set_hl(0, group, hl)
+end
+
 if not present then
    return
 end
