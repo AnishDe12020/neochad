@@ -16,8 +16,6 @@ local plugins = {
       end,
    },
 
-   ["folke/trouble.nvim"] = {},
-
    ["akinsho/toggleterm.nvim"] = {
       config = function()
          require "plugins.configs.toggleterm"
@@ -152,12 +150,6 @@ local plugins = {
    ["hrsh7th/cmp-path"] = {
       after = "cmp-buffer",
    },
-
-   ["hrsh7th/cmp-cmdline"] = { after = "cmp-nvim-lua" },
-
-   -- snippet plugins
-   ["buidler-hub/react-nextjs-snippets"] = {},
-
    -- misc plugins
    ["windwp/nvim-autopairs"] = {
       after = "nvim-cmp",
@@ -180,21 +172,6 @@ local plugins = {
          require("plugins.configs.others").comment()
       end,
    },
-
-   ["jose-elias-alvarez/null-ls.nvim"] = {
-      after = "nvim-lspconfig",
-      config = function()
-         require "plugins.configs.null-ls"
-      end,
-   },
-
-   ["github/copilot.vim"] = {
-      config = function()
-         require("plugins.configs.others").copilot()
-      end,
-   },
-
-   ["wakatime/vim-wakatime"] = {},
 
    -- file managing , picker etc
    ["kyazdani42/nvim-tree.lua"] = {
