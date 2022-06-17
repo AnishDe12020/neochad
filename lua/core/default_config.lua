@@ -18,6 +18,7 @@ M.options = {
 ---- UI -----
 
 M.ui = {
+   hl_add = {},
    hl_override = {},
    changed_themes = {},
    theme_toggle = { "onedark", "one_light" },
@@ -28,6 +29,7 @@ M.ui = {
 M.plugins = {
    override = {},
    remove = {},
+   user = {},
 
    options = {
       lspconfig = {
@@ -42,7 +44,6 @@ M.plugins = {
    },
 
    -- add, modify, remove plugins
-   user = {},
    status = {
       alpha = true,
    },

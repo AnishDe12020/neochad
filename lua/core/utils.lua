@@ -1,15 +1,18 @@
 local M = {}
+local api = vim.api
+local fn = vim.fn
 
 local merge_tb = vim.tbl_deep_extend
 
 M.close_buffer = function(force)
    if vim.bo.buftype == "terminal" then
-      vim.api.nvim_win_hide(0)
-      return
+      force = force or #api.nvim_list_wins() < 2 and ":bd!"
+      local swap = force and #api.nvim_list_bufs() > 1 and ":bp | bd!" .. fn.bufnr()
+      return vim.cmd(swap or force or "hide")
    end
 
-   local fileExists = vim.fn.filereadable(vim.fn.expand "%p")
-   local modified = vim.api.nvim_buf_get_option(vim.fn.bufnr(), "modified")
+   local fileExists = fn.filereadable(fn.expand "%p")
+   local modified = api.nvim_buf_get_option(fn.bufnr(), "modified")
 
    -- if file doesnt exist & its modified
    if fileExists == 0 and modified then
@@ -18,9 +21,8 @@ M.close_buffer = function(force)
    end
 
    force = force or not vim.bo.buflisted or vim.bo.buftype == "nofile"
-
    -- if not force, change to prev buf and then close current
-   local close_cmd = force and ":bd!" or ":bp | bd" .. vim.fn.bufnr()
+   local close_cmd = force and ":bd!" or ":bp | bd" .. fn.bufnr()
    vim.cmd(close_cmd)
 end
 
@@ -74,9 +76,7 @@ M.remove_default_keys = function()
 end
 
 M.load_mappings = function(mappings, mapping_opt)
-   mappings = mappings or M.load_config().mappings
-
-   -- set mapping function with/without whichkye
+   -- set mapping function with/without whichkey
    local map_func
    local whichkey_exists, wk = pcall(require, "which-key")
 
@@ -92,34 +92,25 @@ M.load_mappings = function(mappings, mapping_opt)
       end
    end
 
-   for section, section_mappings in pairs(mappings) do
-      if section ~= "lspconfig" then
-         -- skip mapping this as its mapppings are loaded in lspconfiguti
-         for mode, mode_mappings in pairs(section_mappings) do
-            for keybind, mapping_info in pairs(mode_mappings) do
-               -- merge default + user opts
+   mappings = mappings or vim.deepcopy(M.load_config().mappings)
+   mappings.lspconfig = nil
 
-               local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
-               local opts = merge_tb("force", default_opts, mapping_info.opts or {})
+   for _, section_mappings in pairs(mappings) do
+      -- skip mapping this as its mapppings are loaded in lspconfig
+      for mode, mode_mappings in pairs(section_mappings) do
+         for keybind, mapping_info in pairs(mode_mappings) do
+            -- merge default + user opts
 
-               if mapping_info.opts then
-                  mapping_info.opts = nil
-               end
+            local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
+            local opts = merge_tb("force", default_opts, mapping_info.opts or {})
 
-               map_func(keybind, mapping_info, opts)
+            if mapping_info.opts then
+               mapping_info.opts = nil
             end
+
+            map_func(keybind, mapping_info, opts)
          end
       end
-   end
-end
-
--- load plugin after entering vim ui
-M.packer_lazy_load = function(plugin, timer)
-   if plugin then
-      timer = timer or 0
-      vim.defer_fn(function()
-         require("packer").loader(plugin)
-      end, timer)
    end
 end
 
@@ -156,6 +147,10 @@ end
 
 M.load_override = function(default_table, plugin_name)
    local user_table = M.load_config().plugins.override[plugin_name]
+
+   if type(user_table) == "function" then
+      user_table = user_table()
+   end
 
    if type(user_table) == "table" then
       default_table = merge_tb("force", default_table, user_table)
